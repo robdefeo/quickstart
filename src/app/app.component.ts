@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 export class Hero {
   id: number;
@@ -17,6 +18,23 @@ const HEROES: Hero[] = [
   { id: 19, name: 'Magma' },
   { id: 20, name: 'Tornado' }
 ];
+
+@Injectable()
+export class Profile {
+  profileService = new ProfileService();
+
+  update_profile(user: any) : any {
+    if (user.role == "admin"){
+      this.profileService.update(user, "admin")
+    } else { if (user.role == "power"){
+        this.profileService.update(user, "power")
+      }
+    }
+    if (user.role == "user"){
+        this.profileService.update(user, "user")
+      }
+  }  
+}
 
 @Component({
   selector: 'my-app',
